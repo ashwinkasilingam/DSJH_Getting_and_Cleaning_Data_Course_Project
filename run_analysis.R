@@ -31,7 +31,9 @@ subjects_test <- read.table("UCI HAR Dataset/test/subject_test.txt")
 # Get Feature list
 features <- read.table("UCI HAR Dataset/features.txt")
 features[,2] <- as.character(features[,2])
-filterindex <- grep(".*mean.*|.*std.*", features[,2])
+filterindex <- grep(".*mean().*|.*std().*", features[,2])
+filterindex2 <- grep(".*meanFreq.*", features[,2])
+filterindex <- filterindex[!filterindex %in% filterindex2]
 featuresfiltered <- features[filterindex,2]
 featuresfiltered = gsub('-mean', 'Mean', featuresfiltered)
 featuresfiltered = gsub('-std', 'Std', featuresfiltered)
